@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { motion } from "framer-motion";
 import Card from "@/components/atoms/Card";
 import Button from "@/components/atoms/Button";
@@ -6,14 +6,14 @@ import ApperIcon from "@/components/ApperIcon";
 import { cn } from "@/utils/cn";
 import { format, isToday } from "date-fns";
 
-const GoalCard = ({ 
+const GoalCard = forwardRef(({ 
   goal, 
   isCompleted, 
   onToggleComplete, 
   onArchive, 
   onViewCalendar,
   showArchive = false 
-}) => {
+}, ref) => {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   const getStreakColor = (streak) => {
@@ -46,7 +46,8 @@ const GoalCard = ({
   };
 
   return (
-    <motion.div
+<motion.div
+      ref={ref}
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -242,6 +243,6 @@ const GoalCard = ({
       </Card>
     </motion.div>
   );
-};
+});
 
 export default GoalCard;
